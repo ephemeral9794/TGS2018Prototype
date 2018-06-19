@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
 	// Unity Editor設定値
 	[SerializeField]
 	protected Slider hpSlider;
+    [SerializeField]
+    protected GameObject gameOverText;
 
 	// 内部変数
 	protected int hp;
@@ -20,4 +22,18 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ThrowObject")
+        {
+            hp -= 10;
+            hpSlider.value = hp;
+            Debug.Log(hp);
+            if (hp == 0) {
+                // Game Over
+                gameOverText.SetActive(true);
+            }
+        }
+    }
 }
