@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 		hp = 100;
 		hpSlider.value = hp;
 		gameOverText.enabled = false;
-		hit = transform.FindChild("Hit").gameObject;
+		hit = transform.Find("Hit").gameObject;
 		hit.GetComponent<BoxCollider2D>().enabled = false;
 	}
 
