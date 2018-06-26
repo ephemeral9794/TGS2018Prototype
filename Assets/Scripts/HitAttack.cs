@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowObject : MonoBehaviour {
+public class HitAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +14,9 @@ public class ThrowObject : MonoBehaviour {
 
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(gameObject);
-    }
+	void OnTriggerEnter2D(Collider2D collider) {
+		if (collider.gameObject.tag == "ThrowObject") {
+			Destroy(collider.gameObject);
+		}
+	}
 }
