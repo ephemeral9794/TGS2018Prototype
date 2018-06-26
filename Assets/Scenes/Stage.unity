@@ -1290,7 +1290,6 @@ MonoBehaviour:
   player: {fileID: 84782092}
   power: 3
   rotation: 20
-  interval: 2.23
   num: 10
 --- !u!114 &1487224194
 MonoBehaviour:
