@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
 	[SerializeField]
 	private GameObject throwObj;
 	[SerializeField]
+<<<<<<< HEAD
 	private GameObject player;
     [SerializeField, Range(0.0f, 10.0f)]
     private float power = 3.0f;
@@ -22,10 +23,18 @@ public class Enemy : MonoBehaviour {
 		if (throwObj != null) {
 			StartCoroutine(GenerateObject());
 		}
+=======
+	private Player player;
+
+	// Use this for initialization
+	void Start () {
+		
+>>>>>>> parent of 08610f1... add data
 	}
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
 		
 	}
 
@@ -38,4 +47,11 @@ public class Enemy : MonoBehaviour {
             yield return new WaitForSeconds(interval);
         }
     }
+=======
+		if (throwObj != null) {
+			Instantiate(throwObj);
+
+		}
+	}
+>>>>>>> parent of 08610f1... add data
 }

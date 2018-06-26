@@ -7,8 +7,11 @@ public class Player : MonoBehaviour {
 	// Unity Editor設定値
 	[SerializeField]
 	protected Slider hpSlider;
+<<<<<<< HEAD
     [SerializeField]
     protected GameObject gameOverText;
+=======
+>>>>>>> parent of 08610f1... add data
 
 	// 内部変数
 	protected int hp;
@@ -22,6 +25,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 		
 	}
+<<<<<<< HEAD
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,4 +40,6 @@ public class Player : MonoBehaviour {
             }
         }
     }
+=======
+>>>>>>> parent of 08610f1... add data
 }
