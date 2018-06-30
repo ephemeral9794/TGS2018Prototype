@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+	public static bool Enabled { get; set; }
+
 	public enum ObjectType {
 		Banana,
 		Strawberry,
@@ -29,39 +31,43 @@ public class Enemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-			switch (type) {
-				case ObjectType.Banana:
-					throwObj = Resources.Load("Prefabs/fruit_banana") as GameObject;
-					break;
-				case ObjectType.Strawberry:
-					throwObj = Resources.Load("Prefabs/fruit_strawberry") as GameObject;
-					break;
-				case ObjectType.Money:
-					throwObj = Resources.Load("Prefabs/money_koban") as GameObject;
-					break;
-				case ObjectType.Rock:
-					throwObj = Resources.Load("Prefabs/rock") as GameObject;
-					break;
-				case ObjectType.Table:
-					throwObj = Resources.Load("Prefabs/table_chabudai") as GameObject;
-					break;
-			}
-			timeElapsed = 0.0f;
-			n = 0;
-			//StartCoroutine(GenerateObject());
+		Enabled = true;
+		switch (type) {
+			case ObjectType.Banana:
+				throwObj = Resources.Load("Prefabs/fruit_banana") as GameObject;
+				break;
+			case ObjectType.Strawberry:
+				throwObj = Resources.Load("Prefabs/fruit_strawberry") as GameObject;
+				break;
+			case ObjectType.Money:
+				throwObj = Resources.Load("Prefabs/money_koban") as GameObject;
+				break;
+			case ObjectType.Rock:
+				throwObj = Resources.Load("Prefabs/rock") as GameObject;
+				break;
+			case ObjectType.Table:
+				throwObj = Resources.Load("Prefabs/table_chabudai") as GameObject;
+				break;
+		}
+		timeElapsed = 0.0f;
+		n = 0;
+		//StartCoroutine(GenerateObject());
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (timeElapsed >= wait) {
-			if (n < count) {
-				GameObject obj = Instantiate(throwObj, transform.position, Quaternion.identity, transform) as GameObject;
-				Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
-				Vector2 launchVector = Quaternion.Euler(0, 0, angle) * transform.up.normalized;
-				//Debug.Log($"{launchVector}, {transform.up.normalized}");
-	      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
+		if (Enabled) {
+			if (timeElapsed >= wait) {
+				if (n < count) {
+					GameObject obj = Instantiate(throwObj, transform.position, Quaternion.identity, transform) as GameObject;
+					Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+					Vector2 launchVector = Quaternion.Euler(0, 0, angle) * transform.up.normalized;
+					//Debug.Log($"{launchVector}, {transform.up.normalized}");
+		      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
+					obj.GetComponent<ThrowObject>().Player = player.GetComponent<Player>();
+				}
+				timeElapsed = 0.0f;
 			}
-			timeElapsed = 0.0f;
 		}
 
 		timeElapsed += Time.deltaTime;

@@ -14,9 +14,10 @@ public class HitAttack : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter2D(Collider2D collider) {
+	/*void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "ThrowObject") {
+			Debug.Log(collider.gameObject.name);
 			Destroy(collider.gameObject);
 		}
-	}
+	}*/
 }
