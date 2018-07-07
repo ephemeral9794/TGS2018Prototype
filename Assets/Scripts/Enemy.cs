@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 	public static bool Enabled { get; set; }
+	private static readonly int[] incidence = new [] {
+		17, 17, 17, 17, 17, 15
+	};
 
 	public enum ObjectType {
 		Banana,
@@ -22,17 +25,19 @@ public class Enemy : MonoBehaviour {
 	private float angle = 20.0f;
 	[SerializeField, Range(1.0f, 10.0f)]
 	private float wait = 3.0f;
-	[SerializeField]
-	private int count = 5;
+	//[SerializeField]
+	//private int count = 5;
 
 	private GameObject throwObj;
+	private List<GameObject> throwObjects;
 	private float timeElapsed;
-	private int n;
+	private List<int> incidenceList;
+	//private int n;
 
 	// Use this for initialization
 	void Start () {
 		Enabled = true;
-		switch (type) {
+		/*switch (type) {
 			case ObjectType.Banana:
 				throwObj = Resources.Load("Prefabs/fruit_banana") as GameObject;
 				break;
@@ -48,9 +53,18 @@ public class Enemy : MonoBehaviour {
 			case ObjectType.Table:
 				throwObj = Resources.Load("Prefabs/table_chabudai") as GameObject;
 				break;
-		}
+		}*/
+		throwObjects = new List<GameObject>();
+		throwObjects.Add(Resources.Load("Prefabs/drink_taru") as GameObject);
+		throwObjects.Add(Resources.Load("Prefabs/fruit_banana") as GameObject);
+		throwObjects.Add(Resources.Load("Prefabs/rock") as GameObject);
+		throwObjects.Add(Resources.Load("Prefabs/table_chabudai") as GameObject);
+		throwObjects.Add(Resources.Load("Prefabs/fruit_strawberry") as GameObject);
+		throwObjects.Add(Resources.Load("Prefabs/money_koban") as GameObject);
+		incidenceList = Incidence.GetIncidenceDistributionList(incidence);
+		Debug.Log(incidenceList);
 		timeElapsed = 0.0f;
-		n = 0;
+		//n = 0;
 		//StartCoroutine(GenerateObject());
 	}
 
@@ -58,14 +72,14 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 		if (Enabled) {
 			if (timeElapsed >= wait) {
-				if (n < count) {
-					GameObject obj = Instantiate(throwObj, transform.position, Quaternion.identity, transform) as GameObject;
-					Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
-					Vector2 launchVector = Quaternion.Euler(0, 0, angle) * transform.up.normalized;
-					//Debug.Log($"{launchVector}, {transform.up.normalized}");
-		      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
-					obj.GetComponent<ThrowObject>().Player = player.GetComponent<Player>();
-				}
+				int n = Random.Range(0, incidenceList.Count);
+				var throwObj = throwObjects[incidenceList[n]];
+				GameObject obj = Instantiate(throwObj, transform.position, Quaternion.identity, transform) as GameObject;
+				Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+				Vector2 launchVector = Quaternion.Euler(0, 0, angle) * transform.up.normalized;
+				//Debug.Log($"{launchVector}, {transform.up.normalized}");
+	      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
+				obj.GetComponent<ThrowObject>().Player = player.GetComponent<Player>();
 				timeElapsed = 0.0f;
 			}
 		}

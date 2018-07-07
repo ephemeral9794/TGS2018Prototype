@@ -9,8 +9,8 @@ public class Player : MonoBehaviour {
 	private Slider hpSlider;
 	[SerializeField]
 	private Text gameOverText;
-	[SerializeField, Range(1, 100)]
-	private int damage = 10;
+	//[SerializeField, Range(1, 100)]
+	//private int damage = 10;
 	[SerializeField]
 	private float duration = 2.0f;
 
@@ -24,10 +24,10 @@ public class Player : MonoBehaviour {
 		get { return hp; }
 		set { hp = value > 100 ? 100 : value < 0 ? 0 : value; hpSlider.value = hp; }
 	}
-	public int Damage {
+	/*public int Damage {
 		get { return damage; }
 		//set { damage = value > 100 ? 100 : value < 1 ? 1 : value; }
-	}
+	}*/
 	public Text GameOverText {
 		get { return gameOverText; }
 		//set { gameOverText = value; }

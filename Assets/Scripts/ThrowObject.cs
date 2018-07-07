@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ThrowObject : MonoBehaviour {
 
+	[SerializeField, Range(0, 30)]
+	private int damage;
+
 	public Player Player { get; set; }
 
 	// Use this for initialization
@@ -25,7 +28,7 @@ public class ThrowObject : MonoBehaviour {
 		}
 		if (collider.gameObject.tag == "Player") {
 			//Debug.Log(collider.gameObject.name);
-			Player.HP -= Player.Damage;
+			Player.HP -= damage;
 			if (Player.HP <= 0) {
 				Player.GameOverText.enabled = true;
 				Enemy.Enabled = false;

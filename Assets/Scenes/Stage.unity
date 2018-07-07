@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &228336881
 AudioSource:
   m_ObjectHideFlags: 0
@@ -324,7 +324,6 @@ GameObject:
   - component: {fileID: 376533340}
   - component: {fileID: 376533338}
   - component: {fileID: 376533342}
-  - component: {fileID: 376533339}
   m_Layer: 0
   m_Name: Hit
   m_TagString: HitAttack
@@ -375,17 +374,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 93.183624, y: 25}
   m_EdgeRadius: 0
---- !u!114 &376533339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 376533336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 202ca32054c31ae41a8333d756f0ef1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &376533340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,7 +565,6 @@ MonoBehaviour:
   power: 3
   angle: -20
   wait: 4
-  count: 10
 --- !u!114 &414528217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,8 +649,7 @@ MonoBehaviour:
   player: {fileID: 1607132105}
   power: 3
   angle: -20
-  wait: 2
-  count: 10
+  wait: 5
 --- !u!114 &521832774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,7 +1062,6 @@ MonoBehaviour:
   power: 3
   angle: 20
   wait: 5
-  count: 10
 --- !u!114 &1017376916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,7 +1288,6 @@ MonoBehaviour:
   power: 3
   angle: 20
   wait: 3
-  count: 10
 --- !u!224 &1187318686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1760,8 +1744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpSlider: {fileID: 1060479133}
   gameOverText: {fileID: 1105086943}
-  damage: 10
-  duration: 0.5
+  duration: 0.25
 --- !u!224 &1607132111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1933,7 +1916,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: km/h
+  m_Text: 0km/h
 --- !u!222 &1747102468
 CanvasRenderer:
   m_ObjectHideFlags: 0
