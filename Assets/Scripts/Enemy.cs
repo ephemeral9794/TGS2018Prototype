@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-	public static bool Enabled { get; set; }
+	//public static bool Enabled { get; set; }
 	private static readonly int[] incidence = new [] {
-		17, 17, 17, 17, 17, 15
+		18, 18, 18, 18, 18, 10
 	};
 
-	public enum ObjectType {
-		Banana,
-		Strawberry,
-		Money,
-		Rock,
-		Table,
-	}
-	[SerializeField]
-	private ObjectType type;
+	//[SerializeField]
+	//private ObjectType type;
 	[SerializeField]
 	private GameObject player;
 	[SerializeField, Range(1.0f, 10.0f)]
@@ -32,11 +25,13 @@ public class Enemy : MonoBehaviour {
 	private List<GameObject> throwObjects;
 	private float timeElapsed;
 	private List<int> incidenceList;
+	private float wait_real;
+	private float shake_width;
 	//private int n;
 
 	// Use this for initialization
 	void Start () {
-		Enabled = true;
+		//Enabled = true;
 		/*switch (type) {
 			case ObjectType.Banana:
 				throwObj = Resources.Load("Prefabs/fruit_banana") as GameObject;
@@ -62,16 +57,18 @@ public class Enemy : MonoBehaviour {
 		throwObjects.Add(Resources.Load("Prefabs/fruit_strawberry") as GameObject);
 		throwObjects.Add(Resources.Load("Prefabs/money_koban") as GameObject);
 		incidenceList = Incidence.GetIncidenceDistributionList(incidence);
-		Debug.Log(incidenceList);
+		//Debug.Log(incidenceList);
 		timeElapsed = 0.0f;
+		wait_real = wait;
+		shake_width = 1.0f;
 		//n = 0;
 		//StartCoroutine(GenerateObject());
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Enabled) {
-			if (timeElapsed >= wait) {
+		if (Player.Enabled) {
+			if (timeElapsed >= wait_real) {
 				int n = Random.Range(0, incidenceList.Count);
 				var throwObj = throwObjects[incidenceList[n]];
 				GameObject obj = Instantiate(throwObj, transform.position, Quaternion.identity, transform) as GameObject;
@@ -81,6 +78,7 @@ public class Enemy : MonoBehaviour {
 	      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
 				obj.GetComponent<ThrowObject>().Player = player.GetComponent<Player>();
 				timeElapsed = 0.0f;
+				wait_real = wait + Random.Range(-shake_width, shake_width);
 			}
 		}
 

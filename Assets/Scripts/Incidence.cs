@@ -14,12 +14,10 @@ public static class Incidence {
 
 	public static List<int> GetIncidenceDistributionList (params int [] incidences) {
 		var incidenceList = new List<int> ();
-
 		int gcd = GCD (incidences);
 
 		for (int i = 0, len = incidences.Length; i < len; i++) {
 			int incidence = incidences [i] / gcd;
-
 			for (int j = 0; j <= incidence; j++) {
 				incidenceList.Add (i);
 			}

@@ -1,14 +1,22 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
+	// static
+	public static bool Enabled { get; set; }
+
 	// Unity Editor設定値
 	[SerializeField]
 	private Slider hpSlider;
 	[SerializeField]
 	private Text gameOverText;
+	[SerializeField]
+	private Text SpeedText;
+	[SerializeField]
+	private Text TimeText;
 	//[SerializeField, Range(1, 100)]
 	//private int damage = 10;
 	[SerializeField]
@@ -18,6 +26,8 @@ public class Player : MonoBehaviour {
 	private int hp;
 	private GameObject hit;
 	private float timeDuration;
+	private int speed;
+	private float timeElapsed;
 
 	// プロパティ
 	public int HP {
@@ -32,11 +42,34 @@ public class Player : MonoBehaviour {
 		get { return gameOverText; }
 		//set { gameOverText = value; }
 	}
+	public int Speed {
+		get { return speed; }
+		set {
+			speed = value < 0 ? 0 : value;
+			SpeedText.text = string.Format("{0}km/h", speed);
+		}
+	}
+	public float TimeElapsed {
+		get { return timeElapsed; }
+		set {
+			timeElapsed = value;
+			int minite = (int)Math.Floor(timeElapsed / 60.0f);
+			TimeText.text = string.Format("{0:#0}:{1:00.##}", minite, timeElapsed);
+		}
+	}
+	public GameObject HitAttack {
+		get { return hit; }
+	}
 
 	// Use this for initialization
 	void Start () {
+		Enabled = true;
 		hp = 100;
 		hpSlider.value = hp;
+		speed = 0;
+		SpeedText.text = string.Format("{0}km/h", speed);
+		timeElapsed = 0.0f;
+		TimeText.text = string.Format("{0:0.##}", timeElapsed);
 		gameOverText.enabled = false;
 		hit = transform.Find("Hit").gameObject;
 		//hit.GetComponent<BoxCollider2D>().enabled = false;
@@ -46,7 +79,7 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Enemy.Enabled) {
+		if (Enabled) {
 			if (Input.GetMouseButtonDown (0)) {
 				if (hit.activeSelf == false) {
 					//hit.GetComponent<BoxCollider2D>().enabled = true;
@@ -57,13 +90,16 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
-		if (hit.GetComponent<BoxCollider2D>().enabled == true) {
+		if (hit.activeSelf == true) {
 			if (timeDuration >= duration) {
 				//hit.GetComponent<BoxCollider2D>().enabled = false;
 				//hit.GetComponent<Image>().enabled = true;
 				hit.SetActive(false);
 			}
 		}
+
+		if (Enabled)
+			TimeElapsed += Time.deltaTime;
 
 		timeDuration += Time.deltaTime;
 	}
