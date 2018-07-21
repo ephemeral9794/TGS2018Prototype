@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
 	private Text SpeedText;
 	[SerializeField]
 	private Text TimeText;
+	/*[SerializeField]
+	private Animator hitAnimator;*/
 	//[SerializeField, Range(1, 100)]
 	//private int damage = 10;
 	[SerializeField]
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour {
 
 	// 内部変数
 	private int hp;
-	private GameObject hit;
+	//private GameObject hit;
 	private float timeDuration;
 	private int speed;
 	private float timeElapsed;
@@ -57,9 +59,9 @@ public class Player : MonoBehaviour {
 			TimeText.text = string.Format("{0:#0}:{1:00.##}", minite, timeElapsed);
 		}
 	}
-	public GameObject HitAttack {
+	/*public GameObject HitAttack {
 		get { return hit; }
-	}
+	}*/
 
 	// Use this for initialization
 	void Start () {
@@ -71,21 +73,22 @@ public class Player : MonoBehaviour {
 		timeElapsed = 0.0f;
 		TimeText.text = string.Format("{0:0.##}", timeElapsed);
 		gameOverText.enabled = false;
-		hit = transform.Find("Hit").gameObject;
+		//hit = transform.Find("Hit").gameObject;
 		//hit.GetComponent<BoxCollider2D>().enabled = false;
 		//hit.GetComponent<Image>().enabled = false;
-		hit.SetActive(false);
+		//hit.SetActive(false);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Enabled) {
+		/*if (Enabled) {
 			if (Input.GetMouseButtonDown (0)) {
 				if (hit.activeSelf == false) {
 					//hit.GetComponent<BoxCollider2D>().enabled = true;
 					//hit.GetComponent<Image>().enabled = true;
 					hit.SetActive(true);
-					hit.GetComponent<Animator>().Play("Effect",0,0.0f);
+					//hit.GetComponent<Animator>().Play("Effect",0,0.0f);
+					hitAnimator.Play("Effect", 0, 0.0f);
 					timeDuration = 0.0f;
 				}
 			}
@@ -95,8 +98,9 @@ public class Player : MonoBehaviour {
 				//hit.GetComponent<BoxCollider2D>().enabled = false;
 				//hit.GetComponent<Image>().enabled = true;
 				hit.SetActive(false);
+
 			}
-		}
+		}*/
 
 		if (Enabled)
 			TimeElapsed += Time.deltaTime;
