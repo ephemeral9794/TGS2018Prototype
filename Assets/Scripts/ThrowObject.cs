@@ -49,6 +49,7 @@ public class ThrowObject : MonoBehaviour {
 									if (out_count <= 0) {
 										Player.HP = 0;
 										Player.GameOverText.enabled = true;
+										//Player.Enabled = false;
 										Player.Enabled = false;
 									}
 								}

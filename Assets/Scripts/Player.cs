@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
@@ -144,6 +145,11 @@ public class Player : MonoBehaviour {
 
 		if (Enabled)
 			TimeElapsed += Time.deltaTime;
+
+		if (!Enabled) {
+			if (Input.GetMouseButtonDown(0)) 
+				SceneManager.LoadScene(0);
+		}
 
 		timeDuration += Time.deltaTime;
 	}

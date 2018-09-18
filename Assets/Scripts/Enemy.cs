@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour {
 				Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
 				Vector2 launchVector = Quaternion.Euler(0, 0, angle) * transform.up.normalized;
 				//Debug.Log($"{launchVector}, {transform.up.normalized}");
-	      rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
+				rigidbody.AddForce(launchVector * power, ForceMode2D.Impulse);
 				obj.GetComponent<ThrowObject>().Player = player.GetComponent<Player>();
 				timeElapsed = 0.0f;
 				wait_real = wait + Random.Range(-shake_width, shake_width);
